@@ -13,20 +13,10 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', 'App\Http\Controllers\ModuleController@index');
-Route::get('register', function(){
-    return view('admins.create');
+
+
+Route::get('/', function(){
+  return view('index');
 });
 
-Route::resource('modules', 'App\Http\Controllers\ModuleController');
-Route::resource('users', 'App\Http\Controllers\UserController');
-
-Route::group(['middleware'=>'modules:messages'], function(){
-    Route::get('messages', function(){
-        return 'Si llegaste hasta aquí, tus mensajes están habilitados';
-    });
-});
-
-Route::get('modulo-deshabilitado', function(){
-    return view('disabled_module');
-})->name('modules.disabled');
+Route::post('asignar', 'App\Http\Controllers\SerialController@index');

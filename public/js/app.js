@@ -1842,13 +1842,40 @@ module.exports = {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var vue_dist_vue_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue/dist/vue.js */ "./node_modules/vue/dist/vue.js");
-/* harmony import */ var vue_dist_vue_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(vue_dist_vue_js__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var vue_dist_vue_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vue/dist/vue.js */ "./node_modules/vue/dist/vue.js");
+/* harmony import */ var vue_dist_vue_js__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(vue_dist_vue_js__WEBPACK_IMPORTED_MODULE_1__);
 __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
 
 
-var app = new (vue_dist_vue_js__WEBPACK_IMPORTED_MODULE_0___default())({
-  el: '#app'
+
+var app = new (vue_dist_vue_js__WEBPACK_IMPORTED_MODULE_1___default())({
+  el: '#app',
+  data: function data() {
+    return {
+      user_id: 1,
+      mac: '000000',
+      notFound: false
+    };
+  },
+  methods: {
+    asignar: function asignar() {
+      this.notFound = false;
+      var data = {
+        user_id: this.user_id,
+        mac: this.mac
+      };
+      var that = this;
+      axios__WEBPACK_IMPORTED_MODULE_0___default().post('/asignar', data).then(function (res) {
+        console.log(res.data);
+      })["catch"](function (err) {
+        if (err.response.status == '404') {
+          that.notFound = true;
+        }
+      });
+    }
+  }
 });
 
 /***/ }),
